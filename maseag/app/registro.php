@@ -22,7 +22,8 @@
 		$reg->bindparam(4,$_POST['tipodoc']);
 		$reg->bindparam(5,$_POST['documento']);
 		$reg->bindparam(6,$_POST['user']);
-		$reg->bindparam(7,$_POST['pass']);
+		$pass=password_hash($_POST['pass'],PASSWORD_BCRYPT);
+		$reg->bindparam(7,$pass);
 
 		if ($reg->execute()) {
 			$msg=1;
@@ -52,7 +53,7 @@
 			<?php
 			}
 			?>
-			<div class="card">
+			<div class="card" style="border-radius: 2.25rem;background-color: #ffffffdb;">
 				<div class="card-header">
 					<h4>Registro de Usuario</h4>
 				</div>

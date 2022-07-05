@@ -8,6 +8,7 @@
 	<link rel="icon" type="image/x-icon" href="../assets/img/logosena.png">
 	<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
 	<script type="text/javascript" src="../assets/js/bootstrap.bundle.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body class="bg-login">
 	<?php 
@@ -21,14 +22,14 @@
 		$result->execute();
 		$data=$result->fetch(PDO::FETCH_ASSOC);
 
-		if ($data['user']==$_POST['user'] && $_POST['pass']==$data['pass']) {
+
+		if ($data['user']==$_POST['user'] && password_verify($_POST['pass'],$data['pass'])) {	
 			$_SESSION['aprendiz'] = $data['idaprendiz'];
 			header('location: home.php');
 		}else{
 			echo "Revise los datos";
 		}
 	}
-
 	?>
 	<div class="container login">
 		<div class="card" style="border-radius: 2.25rem;background-color: #ffffffdb;">
@@ -43,18 +44,14 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form action="" class="was-validated" method="post">
+				<form action="" method="post">
 					<div class="mb-3 mt-3">
 						<label for="uname" class="form-label">Usuario:</label>
 						<input type="text" class="form-control" id="uname" placeholder="Ingrese su usuario" name="user" required>
-						<div class="valid-feedback">Validado.</div>
-						<div class="invalid-feedback">Campo vacio</div>
 					</div>
 					<div class="mb-3 mt-3">
 						<label for="pwd" class="form-label">Contraseña:</label>
 						<input type="password" class="form-control" id="pwd" placeholder="Ingrese su Contraseña" name="pass" required>
-						<div class="valid-feedback">Validado.</div>
-						<div class="invalid-feedback">Campo vacio</div>
 					</div>
 					<div class="clearfix pt-3 pb-3">
 						<span class="float-start">
